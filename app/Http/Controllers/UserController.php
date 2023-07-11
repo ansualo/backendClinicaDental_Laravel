@@ -57,7 +57,7 @@ class UserController extends Controller
                 'message' => 'Users retrieved',
                 'data' => $users
             ], Response::HTTP_OK);
-            
+
         } catch (\Throwable $th) {
             Log::error('Error getting users'. $th->getMessage());
 
@@ -89,7 +89,7 @@ class UserController extends Controller
 
     public function createProfile(Request $request){
         try {
-           
+            
             $validator = Validator::make($request->all(),[
                 'name'=> 'required|string',
                 'surname'=> 'required|string',
@@ -108,7 +108,7 @@ class UserController extends Controller
 
             $validData = $validator->validated();
 
-            $user = USer::create([
+            $user = User::create([
                 'name' => $validData['name'],
                 'surname' => $validData['surname'],
                 'email' => $validData['email'],

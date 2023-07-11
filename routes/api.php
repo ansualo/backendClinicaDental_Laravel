@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TreatmentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,3 +26,7 @@ Route::get('/patients', [UserController::class, 'getAllPatients']);
 Route::get('/dentists', [UserController::class, 'getAllDentists']);
 Route::get('/users/{id}', [UserController::class, 'getProfile']);
 Route::post('/users', [UserController::class, 'createProfile']);
+
+
+Route::get('/treatments', [TreatmentController::class, 'getAllTreatments']);
+Route::post('/treatments', [TreatmentController::class, 'createTreatment']);
