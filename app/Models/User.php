@@ -52,4 +52,12 @@ class User extends Authenticatable
     public function role() {
         return $this->belongTo(Role::class);
     }
+
+    public function doctorAppointments(){
+        return $this->hasMany(Appointment::class, 'doctor_id');
+    }
+
+    public function patientAppointments(){
+        return $this->hasMany(Appointment::class, 'patient_id');
+    }
 }

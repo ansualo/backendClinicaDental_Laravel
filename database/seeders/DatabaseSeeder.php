@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             TreatmentSeeder::class
         ]);
 
+        \App\Models\Appointment::factory(10)->create();
+
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',

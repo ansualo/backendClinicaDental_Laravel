@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'address' => fake()->sentence(),
             'date_of_birth'=> fake()->randomNumber(4, true).'/'.fake()->randomNumber(2, true).'/'.fake()->randomNumber(2, true),
             'collegiate_number'=> fake()->randomNumber(6, true),
-            'role_id'=> 1
+            'role_id'=> fake()->randomElement(range(1, 2)),
         ];
     }
 
