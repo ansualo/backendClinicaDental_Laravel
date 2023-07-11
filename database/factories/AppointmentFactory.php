@@ -18,8 +18,8 @@ class AppointmentFactory extends Factory
     public function definition(): array
     {
 
-        $patientId = User::where('role_id', 2)->inRandomOrder()->first()->id;
-        $doctorId = User::where('role_id', 3)->inRandomOrder()->first()->id;
+        $patientId = User::where('role_id', 1)->inRandomOrder()->first()->id;
+        $doctorId = User::where('role_id', 2)->inRandomOrder()->first()->id;
 
         return [
         'doctor_id' => $doctorId,
