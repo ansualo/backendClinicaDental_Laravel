@@ -35,3 +35,5 @@ Route::get('/profile', [AuthController::class, 'getProfile'])->middleware('auth:
 
 Route::get('/treatments', [TreatmentController::class, 'getAllTreatments']);
 Route::post('/treatments', [TreatmentController::class, 'createTreatment']);
+Route::put('/treatments', [TreatmentController::class, 'updateTreatment']);
+Route::delete('/treatments/{id}', [TreatmentController::class, 'deleteTreatment']);
