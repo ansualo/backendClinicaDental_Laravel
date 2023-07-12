@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TreatmentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -24,8 +25,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/users', [UserController::class, 'getAllUsers']);
 Route::get('/patients', [UserController::class, 'getAllPatients']);
 Route::get('/dentists', [UserController::class, 'getAllDentists']);
-Route::get('/users/{id}', [UserController::class, 'getProfile']);
-Route::post('/users', [UserController::class, 'createProfile']);
+
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout/{id}', [AuthController::class, 'logout']);
+Route::get('/profile', [AuthController::class, 'getProfile'])->middleware('auth:sanctum');;
 
 
 Route::get('/treatments', [TreatmentController::class, 'getAllTreatments']);
