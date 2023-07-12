@@ -106,25 +106,6 @@ class AuthController extends Controller
         }
     }
 
-    public function getProfile()
-    {
-        try {
-
-            $user = auth()->user();
-
-            return response()->json([
-                'message' => 'User found',
-                'data' => $user
-            ], Response::HTTP_OK);
-        } catch (\Throwable $th) {
-            Log::error('Error retrieving user' . $th->getMessage());
-
-            return response()->json([
-                'message' => 'Error retrieving user'
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-    }
-
     public function logout(Request $request)
     {
         try {

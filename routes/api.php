@@ -25,12 +25,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/users', [UserController::class, 'getAllUsers']);
 Route::get('/patients', [UserController::class, 'getAllPatients']);
 Route::get('/dentists', [UserController::class, 'getAllDentists']);
+Route::get('/profile', [UserController::class, 'getProfile'])->middleware('auth:sanctum');
+Route::put('/profile', [UserController::class, 'updateProfile']);
+Route::delete('/profile', [UserController::class, 'deleteMyAccount'])->middleware('auth:sanctum');
+Route::post('/profile/{id}', [UserController::class, 'restoreAccount']);
 
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout/{id}', [AuthController::class, 'logout']);
-Route::get('/profile', [AuthController::class, 'getProfile'])->middleware('auth:sanctum');;
 
 
 Route::get('/treatments', [TreatmentController::class, 'getAllTreatments']);

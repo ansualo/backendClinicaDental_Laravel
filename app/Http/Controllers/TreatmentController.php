@@ -81,7 +81,7 @@ class TreatmentController extends Controller
             $treatment = Treatment::find($validData['id']);
 
             if(!$treatment){
-                return response()->jason([
+                return response()->json([
                     'message' => 'Treatment cannot be found'
                 ], Response::HTTP_OK);
             }
