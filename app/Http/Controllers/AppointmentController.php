@@ -33,6 +33,82 @@ class AppointmentController extends Controller
         }
     }
 
+    public function getOneAppointment($id)
+    {
+        try {
+
+            $appointment = Appointment::where('id', $id)
+            ->with([
+                'patient:id,name,surname',
+                'doctor:id,name,surname',
+                'treatment:id,name,price'
+            ])->get();
+
+            return response()->json([
+                'message' => 'Appointments retrieved',
+                'data' => $appointment
+            ], Response::HTTP_OK);
+        } catch (\Throwable $th) {
+            Log::error('Error retrieving appointment' . $th->getMessage());
+
+            return response()->json([
+                'message' => 'Error retrieving appointment',
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function getPatientAppointments()
+    {
+        try {
+
+            $patientId = auth()->user()->id;
+
+            $appointments = Appointment::where('patient_id', $patientId)
+            ->with([
+                'patient:id,name,surname',
+                'doctor:id,name,surname',
+                'treatment:id,name,price'
+            ])->get();
+
+            return response()->json([
+                'message' => 'Appointments retrieved',
+                'data' => $appointments
+            ], Response::HTTP_OK);
+        } catch (\Throwable $th) {
+            Log::error('Error retrieving appointments' . $th->getMessage());
+
+            return response()->json([
+                'message' => 'Error retrieving appointments',
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function getDoctorAppointments()
+    {
+        try {
+
+            $doctorId = auth()->user()->id;
+
+            $appointments = Appointment::where('doctor_id', $doctorId)
+            ->with([
+                'patient:id,name,surname',
+                'doctor:id,name,surname',
+                'treatment:id,name,price'
+            ])->get();
+
+            return response()->json([
+                'message' => 'Appointments retrieved',
+                'data' => $appointments
+            ], Response::HTTP_OK);
+        } catch (\Throwable $th) {
+            Log::error('Error retrieving appointments' . $th->getMessage());
+
+            return response()->json([
+                'message' => 'Error retrieving appointments',
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
     public function createAppointment(Request $request)
     {
         try {
@@ -169,7 +245,7 @@ class AppointmentController extends Controller
                     'message' => 'Not your appointment'
                 ], Response::HTTP_OK);
             }
-            
+
             Appointment::destroy($id);
 
             return response()->json([

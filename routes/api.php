@@ -43,7 +43,10 @@ Route::put('/treatments', [TreatmentController::class, 'updateTreatment'])->midd
 Route::delete('/treatments/{id}', [TreatmentController::class, 'deleteTreatment'])->middleware('auth:sanctum', 'isAdmin');
 
 
-Route::get('/appointments', [AppointmentController::class, 'getAllAppointments']);
+Route::get('/appointments', [AppointmentController::class, 'getAllAppointments'])->middleware('auth:sanctum', 'isAdmin');
+Route::get('/appointments/{id}', [AppointmentController::class, 'getOneAppointment'])->middleware('auth:sanctum');
+Route::get('/appointments/patient', [AppointmentController::class, 'getPatientAppointments'])->middleware('auth:sanctum');
+Route::get('/appointments/doctor', [AppointmentController::class, 'getDoctorAppointments'])->middleware('auth:sanctum');
 Route::post('/appointments', [AppointmentController::class, 'createAppointment'])->middleware('auth:sanctum');
 Route::put('/appointments/{id}', [AppointmentController::class, 'updateAppointment'])->middleware('auth:sanctum');
 Route::delete('/appointments/{id}', [AppointmentController::class, 'deleteAppointment'])->middleware('auth:sanctum');
