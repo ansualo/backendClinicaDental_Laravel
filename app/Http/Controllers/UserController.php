@@ -13,6 +13,7 @@ class UserController extends Controller
     public function getAllUsers()
     {
         try {
+
             $users = User::get();
 
             return response()->json([
@@ -88,8 +89,10 @@ class UserController extends Controller
     {
         try {
 
+            $userToken = auth()->user();
+
             $validator = Validator::make($request->all(), [
-                'id' => 'required',
+                // 'id' => 'required',
                 'email' => 'email|unique:users,email',
                 'phone' => 'string',
                 'address' => 'string',
@@ -101,7 +104,7 @@ class UserController extends Controller
 
             $validData = $validator->validated();
 
-            $user = User::find($validData['id']);
+            $user = User::find($userToken->id);
 
             if (!$user) {
                 return response()->json([

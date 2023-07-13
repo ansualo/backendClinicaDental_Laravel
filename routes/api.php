@@ -22,13 +22,13 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/users', [UserController::class, 'getAllUsers']);
-Route::get('/patients', [UserController::class, 'getAllPatients']);
+Route::get('/users', [UserController::class, 'getAllUsers'])->middleware('auth:sanctum', 'isAdmin');
+Route::get('/patients', [UserController::class, 'getAllPatients'])->middleware('auth:sanctum', 'isAdmin');
 Route::get('/dentists', [UserController::class, 'getAllDentists']);
 Route::get('/profile', [UserController::class, 'getProfile'])->middleware('auth:sanctum');
-Route::put('/profile', [UserController::class, 'updateProfile']);
+Route::put('/profile', [UserController::class, 'updateProfile'])->middleware('auth:sanctum');
 Route::delete('/profile', [UserController::class, 'deleteMyAccount'])->middleware('auth:sanctum');
-Route::post('/profile/{id}', [UserController::class, 'restoreAccount']);
+Route::post('/profile/{id}', [UserController::class, 'restoreAccount'])->middleware('auth:sanctum', 'isAdmin');
 
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -37,6 +37,6 @@ Route::post('/logout/{id}', [AuthController::class, 'logout']);
 
 
 Route::get('/treatments', [TreatmentController::class, 'getAllTreatments']);
-Route::post('/treatments', [TreatmentController::class, 'createTreatment']);
-Route::put('/treatments', [TreatmentController::class, 'updateTreatment']);
-Route::delete('/treatments/{id}', [TreatmentController::class, 'deleteTreatment']);
+Route::post('/treatments', [TreatmentController::class, 'createTreatment'])->middleware('auth:sanctum', 'isAdmin');
+Route::put('/treatments', [TreatmentController::class, 'updateTreatment'])->middleware('auth:sanctum', 'isAdmin');
+Route::delete('/treatments/{id}', [TreatmentController::class, 'deleteTreatment'])->middleware('auth:sanctum', 'isAdmin');
