@@ -92,7 +92,6 @@ class UserController extends Controller
             $userToken = auth()->user();
 
             $validator = Validator::make($request->all(), [
-                // 'id' => 'required',
                 'email' => 'email|unique:users,email',
                 'phone' => 'string',
                 'address' => 'string',

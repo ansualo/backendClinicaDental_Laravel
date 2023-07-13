@@ -16,6 +16,20 @@ class Appointment extends Model
         'date'
     ];
 
+        /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'doctor_id',
+        'patient_id',
+        'treatment_id',
+        'created_at',
+        'updated_at'
+    ];
+
+
     public function doctor(){
         return $this->belongsTo(User::class, 'doctor_id');
     }

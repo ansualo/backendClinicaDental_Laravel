@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TreatmentController;
 use App\Http\Controllers\UserController;
@@ -40,3 +41,9 @@ Route::get('/treatments', [TreatmentController::class, 'getAllTreatments']);
 Route::post('/treatments', [TreatmentController::class, 'createTreatment'])->middleware('auth:sanctum', 'isAdmin');
 Route::put('/treatments', [TreatmentController::class, 'updateTreatment'])->middleware('auth:sanctum', 'isAdmin');
 Route::delete('/treatments/{id}', [TreatmentController::class, 'deleteTreatment'])->middleware('auth:sanctum', 'isAdmin');
+
+
+Route::get('/appointments', [AppointmentController::class, 'getAllAppointments']);
+Route::post('/appointments', [AppointmentController::class, 'createAppointment'])->middleware('auth:sanctum');
+Route::put('/appointments/{id}', [AppointmentController::class, 'updateAppointment'])->middleware('auth:sanctum');
+Route::delete('/appointments/{id}', [AppointmentController::class, 'deleteAppointment'])->middleware('auth:sanctum');
